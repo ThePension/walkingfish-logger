@@ -11,7 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ch.walkingfish.logger.walkingfishlogger.model.SimpleLog;
+import ch.walkingfish.logger.walkingfishlogger.model.log.SimpleLog;
 
 @Component
 public class LogConsumer {
