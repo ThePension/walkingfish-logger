@@ -4,6 +4,8 @@ package ch.walkingfish.logger.walkingfishlogger.activemq;
 import javax.jms.Message;
 import javax.jms.TextMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.walkingfish.logger.walkingfishlogger.model.log.SimpleLog;
+import ch.walkingfish.logger.walkingfishlogger.service.LoggerService;
 
 @Component
 public class LogConsumer {
@@ -45,6 +48,12 @@ public class LogConsumer {
 
         if (simpleLog != null) System.out.println("Received message 1: " + simpleLog.toString());
         else System.out.println("Received message 2: " + text);
+
+        try {
+            LoggerService.log(simpleLog);
+        } catch (Exception e) {
+            System.out.println("Error while logging message: " + e.getMessage());
+        }
     }
 }
 
