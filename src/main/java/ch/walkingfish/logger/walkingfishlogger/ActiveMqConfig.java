@@ -1,9 +1,6 @@
 package ch.walkingfish.logger.walkingfishlogger;
 
 import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Session;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
@@ -12,11 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
-import org.springframework.jms.support.destination.DynamicDestinationResolver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -94,41 +89,4 @@ public class ActiveMqConfig {
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		return mapper;
     }
-
-    /***
-     * Composant de gestion des messages jms
-     * 
-     * @return une instance de JmsTemplate
-     */
-    // @Bean
-    // public JmsTemplate jmsTemplate() {
-    //     JmsTemplate template = new JmsTemplate();
-    //     template.setConnectionFactory(connectionFactory());
-    //     template.setMessageConverter(messageConverter());
-    //     template.setPubSubDomain(true);
-    //     template.setDestinationResolver(destinationResolver());
-    //     template.setDeliveryPersistent(true);
-    //     return template;
-    // }
-
-    /**
-     * Composant de gestion des routes jms
-     * 
-     * @return une instance de DynamicDestinationResolver
-     */
-    // @Bean
-    // DynamicDestinationResolver destinationResolver() {
-    //     return new DynamicDestinationResolver() {
-    //         @Override
-    //         public Destination resolveDestinationName(Session session, String destinationName, boolean pubSubDomain)
-    //                 throws JMSException {
-    //             if (destinationName.endsWith("-t")) {
-    //                 pubSubDomain = true;
-    //             } else {
-    //                 pubSubDomain = false;
-    //             }
-    //             return super.resolveDestinationName(session, destinationName, pubSubDomain);
-    //         }
-    //     };
-    // }
 }

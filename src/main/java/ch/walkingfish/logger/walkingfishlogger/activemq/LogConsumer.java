@@ -19,6 +19,10 @@ import ch.walkingfish.logger.walkingfishlogger.service.LoggerService;
 @Component
 public class LogConsumer {
     
+    /**
+     * Méthode de réception des messages
+     * @param message le message reçu
+     */
     @JmsListener(destination = "${spring.activemq.queue-name}")
     public void receive(Message message) {
         System.out.println("Received message: " + message.toString());
@@ -39,10 +43,8 @@ public class LogConsumer {
         try {
             simpleLog = mapper.readValue(text, SimpleLog.class);
         } catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
